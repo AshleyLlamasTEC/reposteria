@@ -43,3 +43,97 @@ html {
 [data-scope='carousel'][data-part='slide-group'] {
     padding: 1rem 0;
 }
+
+.flower-frame {
+  width: 450px;
+  aspect-ratio: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  --g: /14.134% 14.134% radial-gradient(
+      #000 calc(71% - 1px),
+      #0000 71%
+    ) no-repeat;
+
+  mask:
+    100% 50% var(--g),
+    97.291% 66.235% var(--g),
+    89.457% 80.711% var(--g),
+    77.347% 91.858% var(--g),
+    62.274% 98.47% var(--g),
+    45.871% 99.829% var(--g),
+    29.915% 95.789% var(--g),
+    16.136% 86.786% var(--g),
+    6.026% 73.797% var(--g),
+    0.682% 58.23% var(--g),
+    0.682% 41.77% var(--g),
+    6.026% 26.203% var(--g),
+    16.136% 13.214% var(--g),
+    29.915% 4.211% var(--g),
+    45.871% 0.171% var(--g),
+    62.274% 1.53% var(--g),
+    77.347% 8.142% var(--g),
+    89.457% 19.289% var(--g),
+    97.291% 33.765% var(--g),
+    radial-gradient(
+      100% 100%,
+      #000 42.348%,
+      #0000 calc(42.348% + 1px)
+    );
+
+  overflow: hidden;
+}
+
+/* imagen decorativa de fondo */
+.flower-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  transform: scale(1.1);
+  filter: brightness(.9) saturate(1.1);
+}
+
+/* capa suave */
+.flower-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(230, 200, 215, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+/* logo */
+.flower-logo {
+  position: relative;
+  z-index: 2;
+  width: 65%;
+  height: 65%;
+  object-fit: contain;
+
+  filter:
+    drop-shadow(0 8px 20px rgba(0,0,0,.15));
+}
+
+
+@font-face {
+    font-family: "Didact";
+    src: url("../fonts/Didact_Gothic/regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Agbalumo";
+    src: url("../fonts/Agbalumo/regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@theme {
+    --font-sans: "Didact", sans-serif;
+    --font-display: "Agbalumo", cursive;
+}

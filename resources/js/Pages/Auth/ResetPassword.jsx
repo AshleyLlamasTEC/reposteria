@@ -1,94 +1,81 @@
 import { useEffect } from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
+import AuthLayout from '@/Layouts/AuthLayout';
+import AuthHeader from '@/Components/auth/AuthHeader';
+import AuthInput from '@/Components/auth/AuthInput';
+import AuthButton from '@/Components/auth/AuthButton';
 
 export default function ResetPassword({ token, email }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        token: token,
-        email: email,
-        password: '',
-        password_confirmation: '',
-    });
+  const { data, setData, post, processing, errors, reset } = useForm({
+    token: token,
+    email: email,
+    password: '',
+    password_confirmation: '',
+  });
 
-    useEffect(() => {
-        return () => {
-            reset('password', 'password_confirmation');
-        };
-    }, []);
+  useEffect(() => {
+    return () => reset('password', 'password_confirmation');
+  }, []);
 
-    const onHandleChange = (event) => {
-        setData(event.target.name, event.target.value);
-    };
+  const handleChange = (e) => setData(e.target.name, e.target.value);
 
-    const submit = (e) => {
-        e.preventDefault();
+  const submit = (e) => {
+    e.preventDefault();
+    post(route('password.store'));
+  };
 
-        post(route('password.store'));
-    };
+  return (
+    <AuthLayout>
+      <Head title="Restablecer contraseña" />
 
-    return (
-        <GuestLayout>
-            <Head title="Reset Password" />
+      <AuthHeader
+        title="Nueva contraseña"
+        subtitle="Elige una contraseña segura para tu cuenta"
+      />
 
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="email" value="Email" />
+      <form onSubmit={submit} className="space-y-4">
+        <AuthInput
+          label="Correo electrónico"
+          icon="mail"
+          type="email"
+          name="email"
+          value={data.email}
+          onChange={handleChange}
+          error={errors.email}
+          placeholder="tu@correo.com"
+          autoComplete="username"
+          disabled
+        />
 
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        onChange={onHandleChange}
-                    />
+        <AuthInput
+          label="Nueva contraseña"
+          icon="lock"
+          type="password"
+          name="password"
+          value={data.password}
+          onChange={handleChange}
+          error={errors.password}
+          placeholder="••••••••"
+          autoComplete="new-password"
+          autoFocus
+        />
 
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
+        <AuthInput
+          label="Confirmar contraseña"
+          icon="lock"
+          type="password"
+          name="password_confirmation"
+          value={data.password_confirmation}
+          onChange={handleChange}
+          error={errors.password_confirmation}
+          placeholder="••••••••"
+          autoComplete="new-password"
+        />
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        isFocused={true}
-                        onChange={onHandleChange}
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-
-                    <TextInput
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={onHandleChange}
-                    />
-
-                    <InputError message={errors.password_confirmation} className="mt-2" />
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        Reset Password
-                    </PrimaryButton>
-                </div>
-            </form>
-        </GuestLayout>
-    );
+        <AuthButton disabled={processing}>
+          {processing ? 'Restableciendo...' : 'Restablecer contraseña'}
+        </AuthButton>
+      </form>
+    </AuthLayout>
+  );
 }

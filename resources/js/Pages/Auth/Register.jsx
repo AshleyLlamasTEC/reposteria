@@ -1,121 +1,99 @@
 import { useEffect } from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
+import AuthLayout from '@/Layouts/AuthLayout';
+import AuthHeader from '@/Components/auth/AuthHeader';
+import AuthInput from '@/Components/auth/AuthInput';
+import AuthButton from '@/Components/auth/AuthButton';
+import AuthFooterLinks from '@/Components/auth/AuthFooterLinks';
 
 export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-    });
+  const { data, setData, post, processing, errors, reset } = useForm({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+  });
 
-    useEffect(() => {
-        return () => {
-            reset('password', 'password_confirmation');
-        };
-    }, []);
+  useEffect(() => {
+    return () => reset('password', 'password_confirmation');
+  }, []);
 
-    const handleOnChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
-    };
+  const handleChange = (e) => setData(e.target.name, e.target.value);
 
-    const submit = (e) => {
-        e.preventDefault();
+  const submit = (e) => {
+    e.preventDefault();
+    post(route('register'));
+  };
 
-        post(route('register'));
-    };
+  return (
+    <AuthLayout>
+      <Head title="Crear cuenta" />
 
-    return (
-        <GuestLayout>
-            <Head title="Register" />
+      <AuthHeader
+        title="Crear cuenta"
+        subtitle="Únete a nuestra dulce comunidad"
+      />
 
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="name" value="Name" />
+      <form onSubmit={submit} className="space-y-4">
+        <AuthInput
+          label="Nombre completo"
+          icon="user"
+          type="text"
+          name="name"
+          value={data.name}
+          onChange={handleChange}
+          error={errors.name}
+          placeholder="María García"
+          autoComplete="name"
+          autoFocus
+        />
 
-                    <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        autoComplete="name"
-                        isFocused={true}
-                        onChange={handleOnChange}
-                        required
-                    />
+        <AuthInput
+          label="Correo electrónico"
+          icon="mail"
+          type="email"
+          name="email"
+          value={data.email}
+          onChange={handleChange}
+          error={errors.email}
+          placeholder="tu@correo.com"
+          autoComplete="username"
+        />
 
-                    <InputError message={errors.name} className="mt-2" />
-                </div>
+        <AuthInput
+          label="Contraseña"
+          icon="lock"
+          type="password"
+          name="password"
+          value={data.password}
+          onChange={handleChange}
+          error={errors.password}
+          placeholder="••••••••"
+          autoComplete="new-password"
+        />
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
+        <AuthInput
+          label="Confirmar contraseña"
+          icon="lock"
+          type="password"
+          name="password_confirmation"
+          value={data.password_confirmation}
+          onChange={handleChange}
+          error={errors.password_confirmation}
+          placeholder="••••••••"
+          autoComplete="new-password"
+        />
 
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        onChange={handleOnChange}
-                        required
-                    />
+        <AuthButton disabled={processing}>
+          {processing ? 'Creando cuenta...' : 'Crear cuenta'}
+        </AuthButton>
 
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={handleOnChange}
-                        required
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-
-                    <TextInput
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={handleOnChange}
-                        required
-                    />
-
-                    <InputError message={errors.password_confirmation} className="mt-2" />
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    <Link
-                        href={route('login')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        Already registered?
-                    </Link>
-
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        Register
-                    </PrimaryButton>
-                </div>
-            </form>
-        </GuestLayout>
-    );
+        <AuthFooterLinks
+          links={[
+            { href: route('login'), label: '¿Ya tienes cuenta? Inicia sesión' },
+          ]}
+        />
+      </form>
+    </AuthLayout>
+  );
 }

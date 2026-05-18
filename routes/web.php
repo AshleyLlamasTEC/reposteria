@@ -5,6 +5,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\DessertController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,9 +31,14 @@ Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
 
-Route::get('/desserts', function () {
-    return Inertia::render('Desserts');
-})->name('desserts');
+// Route::get('/desserts', function () {
+//     return Inertia::render('Desserts');
+// })->name('desserts');
+
+Route::get(
+    '/desserts',
+    [DessertController::class, 'index']
+);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

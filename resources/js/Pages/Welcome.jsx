@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Head, Link, useForm } from '@inertiajs/react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, ChevronRight, X, } from 'lucide-react';
-import Navbar from '@/Components/Navbar';
-import Footer from '@/Components/Footer';
+import React, { useState, useEffect } from "react";
+import { Head, Link, useForm } from "@inertiajs/react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ShoppingCart, ChevronRight, X } from "lucide-react";
+import Navbar from "@/Components/Navbar";
+import Footer from "@/Components/Footer";
 
 export default function Welcome() {
     const [isCakeDialogOpen, setIsCakeDialogOpen] = useState(false);
@@ -13,18 +13,18 @@ export default function Welcome() {
 
     // Estado para el formulario de contacto
     const { data, setData, post, processing, errors, reset } = useForm({
-        nombre: '',
-        email: '',
-        telefono: '',
-        mensaje: '',
-        tipo: 'consulta'
+        nombre: "",
+        email: "",
+        telefono: "",
+        mensaje: "",
+        tipo: "consulta",
     });
 
     // Estado para seguimiento de pedido
-    const [folio, setFolio] = useState('');
+    const [folio, setFolio] = useState("");
     const [pedidoInfo, setPedidoInfo] = useState(null);
     const [isLoadingPedido, setIsLoadingPedido] = useState(false);
-    const [pedidoError, setPedidoError] = useState('');
+    const [pedidoError, setPedidoError] = useState("");
 
     // Imágenes para el slider del hero
     const heroImages = [
@@ -39,24 +39,25 @@ export default function Welcome() {
         {
             id: 1,
             name: "Pastel Chocolate",
-            price: 480.00,
+            price: 480.0,
             image: "/images/shop/pastel-chocolate.jpg",
-            description: "Un pastel lleno de sabor a chocolate intenso"
+            description: "Un pastel lleno de sabor a chocolate intenso",
         },
         {
             id: 2,
             name: "Pastel de Zanahoria",
-            price: 500.00,
+            price: 500.0,
             image: "/images/shop/pastel-zanahoria.jpg",
-            description: "Un clásico con un toque de especias y glaseado de queso crema"
+            description:
+                "Un clásico con un toque de especias y glaseado de queso crema",
         },
         {
             id: 3,
             name: "Cheesecake de Frutos Rojos",
-            price: 420.00,
+            price: 420.0,
             image: "/images/shop/frutos.jpg",
-            description: "Suave y cremoso con salsa de frutos rojos"
-        }
+            description: "Suave y cremoso con salsa de frutos rojos",
+        },
     ];
 
     const cakeFlavors = [
@@ -65,7 +66,7 @@ export default function Welcome() {
         { name: "Fresa", emoji: "🍓" },
         { name: "Limón", emoji: "🍋" },
         { name: "Red Velvet", emoji: "❤️" },
-        { name: "Coco", emoji: "🥥" }
+        { name: "Coco", emoji: "🥥" },
     ];
 
     // Funciones existentes
@@ -79,7 +80,9 @@ export default function Welcome() {
     };
 
     const prevSlide = () => {
-        setCurrentSlide((prev) => (prev - 1 + featuredCakes.length) % featuredCakes.length);
+        setCurrentSlide(
+            (prev) => (prev - 1 + featuredCakes.length) % featuredCakes.length,
+        );
     };
 
     const nextHeroSlide = () => {
@@ -87,75 +90,93 @@ export default function Welcome() {
     };
 
     const prevHeroSlide = () => {
-        setHeroSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
+        setHeroSlide(
+            (prev) => (prev - 1 + heroImages.length) % heroImages.length,
+        );
     };
 
     // Funciones para el formulario de contacto
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('contacto.enviar'), {
+        post(route("contacto.enviar"), {
             onSuccess: () => {
                 reset();
-                alert('Mensaje enviado correctamente. Nos pondremos en contacto contigo pronto.');
+                alert(
+                    "Mensaje enviado correctamente. Nos pondremos en contacto contigo pronto.",
+                );
             },
             onError: () => {
-                alert('Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.');
-            }
+                alert(
+                    "Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.",
+                );
+            },
         });
     };
 
     // Función para buscar pedido por folio
     const buscarPedido = async () => {
         if (!folio.trim()) {
-            setPedidoError('Por favor, ingresa un número de folio');
+            setPedidoError("Por favor, ingresa un número de folio");
             return;
         }
 
         setIsLoadingPedido(true);
-        setPedidoError('');
+        setPedidoError("");
 
         try {
             // Aquí deberías hacer una petición a tu backend
             // Esto es un ejemplo con datos simulados
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
 
             // Datos de ejemplo - reemplaza con tu lógica real
             const pedidosSimulados = {
-                'ABC123': {
-                    folio: 'ABC123',
-                    cliente: 'Juan Pérez',
-                    fecha: '2024-01-15',
-                    estado: 'En preparación',
+                ABC123: {
+                    folio: "ABC123",
+                    cliente: "Juan Pérez",
+                    fecha: "2024-01-15",
+                    estado: "En preparación",
                     productos: [
-                        { nombre: 'Pastel Chocolate', cantidad: 1, precio: 480.00 },
-                        { nombre: 'Galletas Personalizadas', cantidad: 12, precio: 180.00 }
+                        {
+                            nombre: "Pastel Chocolate",
+                            cantidad: 1,
+                            precio: 480.0,
+                        },
+                        {
+                            nombre: "Galletas Personalizadas",
+                            cantidad: 12,
+                            precio: 180.0,
+                        },
                     ],
-                    total: 660.00,
-                    entrega: '2024-01-20',
-                    direccion: 'Calle Principal #123, Col. Centro'
+                    total: 660.0,
+                    entrega: "2024-01-20",
+                    direccion: "Calle Principal #123, Col. Centro",
                 },
-                'DEF456': {
-                    folio: 'DEF456',
-                    cliente: 'María García',
-                    fecha: '2024-01-10',
-                    estado: 'Entregado',
+                DEF456: {
+                    folio: "DEF456",
+                    cliente: "María García",
+                    fecha: "2024-01-10",
+                    estado: "Entregado",
                     productos: [
-                        { nombre: 'Cheesecake Frutos Rojos', cantidad: 1, precio: 420.00 }
+                        {
+                            nombre: "Cheesecake Frutos Rojos",
+                            cantidad: 1,
+                            precio: 420.0,
+                        },
                     ],
-                    total: 420.00,
-                    entrega: '2024-01-12',
-                    direccion: 'Av. Reforma #456'
-                }
+                    total: 420.0,
+                    entrega: "2024-01-12",
+                    direccion: "Av. Reforma #456",
+                },
             };
 
             if (pedidosSimulados[folio]) {
                 setPedidoInfo(pedidosSimulados[folio]);
             } else {
-                setPedidoError('No se encontró un pedido con ese folio');
+                setPedidoError("No se encontró un pedido con ese folio");
                 setPedidoInfo(null);
             }
         } catch (error) {
-            setPedidoError('Error al buscar el pedido. Intenta de nuevo.');
+            setPedidoError("Error al buscar el pedido. Intenta de nuevo.");
             setPedidoInfo(null);
         } finally {
             setIsLoadingPedido(false);
@@ -188,7 +209,7 @@ export default function Welcome() {
                             key={heroSlide}
                             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                             style={{
-                                backgroundImage: `url(${heroImages[heroSlide]})`
+                                backgroundImage: `url(${heroImages[heroSlide]})`,
                             }}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -222,7 +243,7 @@ export default function Welcome() {
                             key={index}
                             onClick={() => setHeroSlide(index)}
                             className={`w-3 h-3 rounded-full transition-all ${
-                                index === heroSlide ? 'bg-white' : 'bg-white/50'
+                                index === heroSlide ? "bg-white" : "bg-white/50"
                             }`}
                         />
                     ))}
@@ -232,27 +253,35 @@ export default function Welcome() {
                 <div className="text-center relative z-10 px-4">
                     {/* Logo arriba del texto */}
                     <motion.div
-                        className="flex justify-center mb-6"
+                        className="flower-frame mx-auto mb-6"
                         initial={{ scale: 0, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
+                        transition={{
+                            delay: 0.2,
+                            duration: 0.8,
+                            type: "spring",
+                        }}
                     >
+                        {/* Fondo */}
+                        <img
+                            src="/images/cake-bg.jpg"
+                            alt=""
+                            className="flower-bg"
+                        />
+
+                        {/* Overlay */}
+                        <div className="flower-overlay" />
+
+                        {/* Logo */}
                         <img
                             src="/images/logo.png"
                             alt="Repostería Patty's"
-                            className="w-80 h-80 object-contain"
-                            onError={(e) => {
-                                e.target.style.display = 'none';
-                                const fallback = document.createElement('div');
-                                fallback.className = 'w-12 h-12 flex items-center justify-center';
-                                fallback.innerHTML = '<Cake className="w-8 h-8 text-pink-500" />';
-                                e.target.parentNode.appendChild(fallback);
-                            }}
+                            className="flower-logo"
                         />
                     </motion.div>
 
                     <motion.p
-                        className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto drop-shadow-lg"
+                        className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto drop-shadow-lg "
                         initial={{ y: 50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.6, duration: 0.8 }}
@@ -263,13 +292,18 @@ export default function Welcome() {
                     <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        transition={{ delay: 0.9, type: "spring", stiffness: 200 }}
+                        transition={{
+                            delay: 0.9,
+                            type: "spring",
+                            stiffness: 200,
+                        }}
                     >
                         <Link
                             href="#catalogo"
                             className="bg-pink-400 hover:bg-pink-500 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2 mx-auto inline-block"
                         >
-                            Ver Nuestros Pasteles <ChevronRight className="w-5 h-5" />
+                            Ver Nuestros Pasteles{" "}
+                            <ChevronRight className="w-5 h-5" />
                         </Link>
                     </motion.div>
                 </div>
@@ -278,8 +312,7 @@ export default function Welcome() {
                     className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20"
                     animate={{ y: [0, 10, 0] }}
                     transition={{ duration: 2, repeat: Infinity }}
-                >
-                </motion.div>
+                ></motion.div>
             </section>
 
             {/* Sección del Catálogo */}
@@ -294,7 +327,9 @@ export default function Welcome() {
                         <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 to-pink-400 bg-clip-text text-transparent pt-10">
                             Nuestras Delicias
                         </h2>
-                        <p className="text-gray-600 text-lg">Selecciona tu favorito</p>
+                        <p className="text-gray-600 text-lg">
+                            Selecciona tu favorito
+                        </p>
                     </motion.div>
 
                     {/* Carousel Manual */}
@@ -303,10 +338,17 @@ export default function Welcome() {
                             <motion.div
                                 className="flex"
                                 animate={{ x: `-${currentSlide * 100}%` }}
-                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 300,
+                                    damping: 30,
+                                }}
                             >
                                 {featuredCakes.map((cake, index) => (
-                                    <div key={cake.id} className="flex-shrink-0 w-full">
+                                    <div
+                                        key={cake.id}
+                                        className="flex-shrink-0 w-full"
+                                    >
                                         <div className="p-8 mx-4">
                                             <div className="flex justify-center mb-6">
                                                 <img
@@ -327,7 +369,9 @@ export default function Welcome() {
                                                     ${cake.price}
                                                 </span>
                                                 <button
-                                                    onClick={() => openCakeDetails(cake)}
+                                                    onClick={() =>
+                                                        openCakeDetails(cake)
+                                                    }
                                                     className="bg-pink-400 hover:bg-pink-500 text-white rounded-full p-3 transition-colors"
                                                 >
                                                     <ShoppingCart className="w-6 h-6" />
@@ -360,7 +404,9 @@ export default function Welcome() {
                                     key={index}
                                     onClick={() => setCurrentSlide(index)}
                                     className={`w-3 h-3 rounded-full ${
-                                        index === currentSlide ? 'bg-pink-500' : 'bg-pink-200'
+                                        index === currentSlide
+                                            ? "bg-pink-500"
+                                            : "bg-pink-200"
                                     }`}
                                 />
                             ))}
@@ -381,7 +427,9 @@ export default function Welcome() {
                         <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-pink-600 to-pink-400 bg-clip-text text-transparent pt-10">
                             Nuestros Sabores
                         </h2>
-                        <p className="text-gray-600 text-lg">¡Tenemos de todo para todos los gustos!</p>
+                        <p className="text-gray-600 text-lg">
+                            ¡Tenemos de todo para todos los gustos!
+                        </p>
                     </motion.div>
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -394,8 +442,12 @@ export default function Welcome() {
                                 transition={{ delay: index * 0.1 }}
                                 whileHover={{ y: -5, scale: 1.05 }}
                             >
-                                <div className="text-4xl mb-3">{flavor.emoji}</div>
-                                <h3 className="font-semibold text-gray-800">{flavor.name}</h3>
+                                <div className="text-4xl mb-3">
+                                    {flavor.emoji}
+                                </div>
+                                <h3 className="font-semibold text-gray-800">
+                                    {flavor.name}
+                                </h3>
                             </motion.div>
                         ))}
                     </div>
@@ -414,7 +466,8 @@ export default function Welcome() {
                         ¿Listo para endulzar tu día?
                     </h2>
                     <p className="text-xl mb-8 opacity-90">
-                        Haz tu pedido ahora y recibe un 10% de descuento en tu primera compra
+                        Haz tu pedido ahora y recibe un 10% de descuento en tu
+                        primera compra
                     </p>
                     <div className="flex gap-4 justify-center flex-wrap">
                         <button className="bg-white text-pink-500 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
@@ -453,11 +506,18 @@ export default function Welcome() {
                                             alt={selectedCake.name}
                                             className="w-full h-full object-cover"
                                             onError={(e) => {
-                                                e.target.style.display = 'none';
-                                                const fallback = document.createElement('div');
-                                                fallback.className = 'w-full h-full bg-gradient-to-br from-pink-200 to-purple-200 flex items-center justify-center';
-                                                fallback.innerHTML = '<div class="text-6xl">🎂</div>';
-                                                e.target.parentNode.appendChild(fallback);
+                                                e.target.style.display = "none";
+                                                const fallback =
+                                                    document.createElement(
+                                                        "div",
+                                                    );
+                                                fallback.className =
+                                                    "w-full h-full bg-gradient-to-br from-pink-200 to-purple-200 flex items-center justify-center";
+                                                fallback.innerHTML =
+                                                    '<div class="text-6xl">🎂</div>';
+                                                e.target.parentNode.appendChild(
+                                                    fallback,
+                                                );
                                             }}
                                         />
                                         {/* Badge */}
@@ -474,7 +534,9 @@ export default function Welcome() {
                                             {selectedCake.name}
                                         </h3>
                                         <button
-                                            onClick={() => setIsCakeDialogOpen(false)}
+                                            onClick={() =>
+                                                setIsCakeDialogOpen(false)
+                                            }
                                             className="text-gray-400 hover:text-gray-600 transition-colors"
                                         >
                                             <X className="w-6 h-6" />
@@ -489,11 +551,17 @@ export default function Welcome() {
                                     <div className="space-y-3 mb-6">
                                         <div className="flex items-center gap-2 text-gray-700">
                                             <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                                            <span className="text-sm">Disponible para entrega inmediata</span>
+                                            <span className="text-sm">
+                                                Disponible para entrega
+                                                inmediata
+                                            </span>
                                         </div>
                                         <div className="flex items-center gap-2 text-gray-700">
                                             <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-                                            <span className="text-sm">Servicio de personalización disponible</span>
+                                            <span className="text-sm">
+                                                Servicio de personalización
+                                                disponible
+                                            </span>
                                         </div>
                                     </div>
 
@@ -504,13 +572,17 @@ export default function Welcome() {
                                                 <span className="text-3xl font-bold text-pink-500">
                                                     ${selectedCake.price}
                                                 </span>
-                                                <p className="text-sm text-gray-500">Precio para 10-12 personas</p>
+                                                <p className="text-sm text-gray-500">
+                                                    Precio para 10-12 personas
+                                                </p>
                                             </div>
                                             <div className="flex items-center gap-2">
                                                 <button className="border border-gray-300 text-gray-700 w-10 h-10 rounded-full hover:bg-gray-50">
                                                     -
                                                 </button>
-                                                <span className="font-semibold">1</span>
+                                                <span className="font-semibold">
+                                                    1
+                                                </span>
                                                 <button className="border border-gray-300 text-gray-700 w-10 h-10 rounded-full hover:bg-gray-50">
                                                     +
                                                 </button>
@@ -519,7 +591,8 @@ export default function Welcome() {
 
                                         <button className="w-full bg-pink-400 hover:bg-pink-500 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-colors transform hover:scale-[1.02]">
                                             <ShoppingCart className="w-5 h-5" />
-                                            Agregar al Carrito - ${selectedCake.price}
+                                            Agregar al Carrito - $
+                                            {selectedCake.price}
                                         </button>
                                     </div>
                                 </div>

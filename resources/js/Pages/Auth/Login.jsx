@@ -1,97 +1,96 @@
 import { useEffect } from 'react';
-import Checkbox from '@/Components/Checkbox';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
+import AuthLayout from '@/Layouts/AuthLayout';
+import AuthHeader from '@/Components/auth/AuthHeader';
+import AuthInput from '@/Components/auth/AuthInput';
+import AuthCheckbox from '@/Components/auth/AuthCheckbox';
+import AuthButton from '@/Components/auth/AuthButton';
+import AuthFooterLinks from '@/Components/auth/AuthFooterLinks';
 
 export default function Login({ status, canResetPassword }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
-        password: '',
-        remember: '',
-    });
+  const { data, setData, post, processing, errors, reset } = useForm({
+    email: '',
+    password: '',
+    remember: false,
+  });
 
-    useEffect(() => {
-        return () => {
-            reset('password');
-        };
-    }, []);
+  useEffect(() => {
+    return () => reset('password');
+  }, []);
 
-    const handleOnChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
-    };
+  const handleChange = (e) => {
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    setData(e.target.name, value);
+  };
 
-    const submit = (e) => {
-        e.preventDefault();
+  const submit = (e) => {
+    e.preventDefault();
+    post(route('login'));
+  };
 
-        post(route('login'));
-    };
+  return (
+    <AuthLayout>
+      <Head title="Iniciar sesión" />
 
-    return (
-        <GuestLayout>
-            <Head title="Log in" />
+      <AuthHeader
+        title="Iniciar sesión"
+        subtitle="Bienvenida de nuevo a tu pastelería favorita"
+      />
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+      {status && (
+        <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-xl text-sm font-medium">
+          {status}
+        </div>
+      )}
 
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="email" value="Email" />
+      <form onSubmit={submit} className="space-y-4">
+        <AuthInput
+          label="Correo electrónico"
+          icon="mail"
+          type="email"
+          name="email"
+          value={data.email}
+          onChange={handleChange}
+          error={errors.email}
+          placeholder="tu@correo.com"
+          autoComplete="username"
+          autoFocus
+        />
 
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        onChange={handleOnChange}
-                    />
+        <AuthInput
+          label="Contraseña"
+          icon="lock"
+          type="password"
+          name="password"
+          value={data.password}
+          onChange={handleChange}
+          error={errors.password}
+          placeholder="••••••••"
+          autoComplete="current-password"
+        />
 
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
+        <div className="flex items-center justify-between">
+          <AuthCheckbox
+            checked={data.remember}
+            onChange={handleChange}
+            label="Recordarme"
+            name="remember"
+          />
+        </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+        <AuthButton disabled={processing}>
+          {processing ? 'Iniciando sesión...' : 'Iniciar sesión'}
+        </AuthButton>
 
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        onChange={handleOnChange}
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox name="remember" value={data.remember} onChange={handleOnChange} />
-                        <span className="ml-2 text-sm text-gray-600">Remember me</span>
-                    </label>
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        Log in
-                    </PrimaryButton>
-                </div>
-            </form>
-        </GuestLayout>
-    );
+        <AuthFooterLinks
+          links={[
+            ...(canResetPassword
+              ? [{ href: route('password.request'), label: '¿Olvidaste tu contraseña?' }]
+              : []),
+            { href: route('register'), label: '¿No tienes cuenta? Regístrate' },
+          ]}
+        />
+      </form>
+    </AuthLayout>
+  );
 }

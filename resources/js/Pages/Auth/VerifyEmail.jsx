@@ -1,45 +1,55 @@
-import GuestLayout from '@/Layouts/GuestLayout';
-import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, Link, useForm } from '@inertiajs/react';
+import AuthLayout from '@/Layouts/AuthLayout';
+import AuthHeader from '@/Components/auth/AuthHeader';
+import AuthButton from '@/Components/auth/AuthButton';
 
 export default function VerifyEmail({ status }) {
-    const { post, processing } = useForm({});
+  const { post, processing } = useForm({});
 
-    const submit = (e) => {
-        e.preventDefault();
+  const submit = (e) => {
+    e.preventDefault();
+    post(route('verification.send'));
+  };
 
-        post(route('verification.send'));
-    };
+  return (
+    <AuthLayout>
+      <Head title="Verificar correo" />
 
-    return (
-        <GuestLayout>
-            <Head title="Email Verification" />
+      <AuthHeader
+        title="Verifica tu correo"
+        subtitle="Gracias por registrarte. Revisa tu bandeja de entrada"
+      />
 
-            <div className="mb-4 text-sm text-gray-600">
-                Thanks for signing up! Before getting started, could you verify your email address by clicking on the
-                link we just emailed to you? If you didn't receive the email, we will gladly send you another.
-            </div>
+      {status === 'verification-link-sent' && (
+        <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-xl text-sm font-medium">
+          Te hemos enviado un nuevo enlace de verificación a tu correo.
+        </div>
+      )}
 
-            {status === 'verification-link-sent' && (
-                <div className="mb-4 font-medium text-sm text-green-600">
-                    A new verification link has been sent to the email address you provided during registration.
-                </div>
-            )}
+      <div className="text-sm text-gray-600 mb-6 text-center space-y-2">
+        <p>
+          Antes de continuar, por favor haz clic en el enlace de verificación que enviamos a tu correo.
+        </p>
+        <p>
+          Si no recibiste el correo, podemos enviarte otro.
+        </p>
+      </div>
 
-            <form onSubmit={submit}>
-                <div className="mt-4 flex items-center justify-between">
-                    <PrimaryButton disabled={processing}>Resend Verification Email</PrimaryButton>
+      <form onSubmit={submit} className="space-y-4">
+        <AuthButton disabled={processing}>
+          {processing ? 'Reenviando...' : 'Reenviar correo de verificación'}
+        </AuthButton>
 
-                    <Link
-                        href={route('logout')}
-                        method="post"
-                        as="button"
-                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        Log Out
-                    </Link>
-                </div>
-            </form>
-        </GuestLayout>
-    );
+        <div className="text-center">
+          <Link
+            href={route('logout')}
+            method="post"
+            className="text-sm text-gray-600 hover:text-pink-600 transition-colors font-medium"
+          >
+            Cerrar sesión
+          </Link>
+        </div>
+      </form>
+    </AuthLayout>
+  );
 }
