@@ -5,8 +5,8 @@ import {
     Heart, Star, Award, Clock, Users, Leaf,
     Cake, Coffee, Sparkles, Shield, Target, Clock as ClockIcon
 } from 'lucide-react';
-import Navbar from '@/Components/Navbar';
-import Footer from '@/Components/Footer';
+import Navbar from '@/Components/ui/Navbar';
+import Footer from '@/Components/ui/Footer';
 
 export default function About() {
 
@@ -65,7 +65,7 @@ export default function About() {
 
     return (
         <>
-            <Head title="Repostería Paty's - Nuestra Historia" />
+            <Head title="Repostería Sweet Stack - Nuestra Historia" />
 
             {/* Navbar */}
             <Navbar />
@@ -139,7 +139,7 @@ export default function About() {
 
                             <div className="space-y-4 text-gray-600">
                                 <p className="text-lg">
-                                    En <span className="font-bold text-pink-600">Repostería Paty's</span>,
+                                    En <span className="font-bold text-pink-600">Repostería Sweet Stack</span>,
                                     creemos que los mejores recuerdos se crean alrededor de una mesa compartiendo
                                     algo dulce. Lo que comenzó como un sueño en la cocina de nuestra fundadora
                                     Patricia, hoy es una tradición que ha endulzado miles de momentos especiales.
@@ -283,7 +283,7 @@ export default function About() {
                                 Contáctanos
                             </a>
                             <a
-                                href={route('desserts')}
+                                href={route('desserts.index')}
                                 className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300"
                             >
                                 Ver Nuestro Menú

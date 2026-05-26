@@ -8,8 +8,8 @@ import {
     DollarSign, Layers, Palette, Gift, MessageSquare,
     Upload, Image as ImageIcon, AlertCircle, Info
 } from 'lucide-react';
-import Navbar from '@/Components/Navbar';
-import Footer from '@/Components/Footer';
+import Navbar from '@/Components/ui/Navbar';
+import Footer from '@/Components/ui/Footer';
 
 export default function Postres() {
     const [selectedCake, setSelectedCake] = useState(null);
@@ -659,7 +659,7 @@ export default function Postres() {
 
     return (
         <>
-            <Head title="Repostería Paty's - Catálogo de Postres" />
+            <Head title="Repostería Sweet Stack - Catálogo de Postres" />
 
             {/* Navbar */}
             <Navbar />

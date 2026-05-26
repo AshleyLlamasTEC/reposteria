@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingCart, ChevronRight, X } from "lucide-react";
-import Navbar from "@/Components/Navbar";
-import Footer from "@/Components/Footer";
+import Navbar from "@/Components/ui/Navbar";
+import Footer from "@/Components/ui/Footer";
 
 export default function Welcome() {
     const [isCakeDialogOpen, setIsCakeDialogOpen] = useState(false);
@@ -195,7 +195,7 @@ export default function Welcome() {
 
     return (
         <>
-            <Head title="Repostería Paty's - Pastelería Artesanal" />
+            <Head title="Repostería Sweet Stack - Pastelería Artesanal" />
 
             {/* Navbar Integrado */}
             <Navbar />
@@ -275,7 +275,7 @@ export default function Welcome() {
                         {/* Logo */}
                         <img
                             src="/images/logo.png"
-                            alt="Repostería Patty's"
+                            alt="Repostería Sweet Stack"
                             className="flower-logo"
                         />
                     </motion.div>

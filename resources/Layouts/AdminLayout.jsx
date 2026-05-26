@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { AdminProvider } from '@/Providers/AdminProvider';
+import { AdminProvider } from '@/Components/Admin/Providers/AdminProvider';
 import Sidebar from '@/Components/Admin/Layout/Sidebar';
 import MobileSidebar from '@/Components/Admin/Layout/MobileSidebar';
 import Navbar from '@/Components/Admin/Layout/Navbar';

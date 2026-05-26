@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Head, router } from "@inertiajs/react";
 
-import Navbar from "@/Components/Navbar";
-import Footer from "@/Components/Footer";
+import Navbar from "@/Components/ui/Navbar";
+import Footer from "@/Components/ui/Footer";
 
 import HeroSearch from "./components/HeroSearch";
 import DessertFilters from "./components/DessertFilters";
@@ -175,7 +175,7 @@ export default function Desserts({ desserts = [], categories = [] }) {
 
     return (
         <>
-            <Head title="Repostería Paty's - Catálogo de Postres" />
+            <Head title="Repostería Sweet Stack - Catálogo de Postres" />
 
             <Navbar />
 

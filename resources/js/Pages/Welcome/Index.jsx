@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Head, Link } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight } from "lucide-react";
-import Navbar from "@/Components/Navbar";
-import Footer from "@/Components/Footer";
+import Navbar from "@/Components/ui/Navbar";
+import Footer from "@/Components/ui/Footer";
 import ProductCarousel from "./ProductCarousel";
 import ProductModal from "./ProductModal";
 import CartToast from "./CartToast";
@@ -68,7 +68,7 @@ export default function Welcome({ featuredProducts = [] }) {
 
     return (
         <>
-            <Head title="Repostería Paty's - Pastelería Artesanal" />
+            <Head title="Repostería Sweet Stack - Pastelería Artesanal" />
             <Navbar />
 
             {/* Hero Section con Slider (se mantiene igual) */}
@@ -146,7 +146,7 @@ export default function Welcome({ featuredProducts = [] }) {
                         {/* Logo */}
                         <img
                             src="/images/logo.png"
-                            alt="Repostería Patty's"
+                            alt="Repostería Sweet Stack"
                             className="flower-logo"
                         />
                     </motion.div>

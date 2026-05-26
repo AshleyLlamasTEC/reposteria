@@ -8,8 +8,8 @@ import {
     QrCode, X, Facebook, Instagram, MessageCircle,
     Cake, Home, ShoppingBag, Users, MessageSquare
 } from 'lucide-react';
-import Navbar from '@/Components/Navbar';
-import Footer from '@/Components/Footer';
+import Navbar from '@/Components/ui/Navbar';
+import Footer from '@/Components/ui/Footer';
 
 export default function Contact() {
     // Estado para el formulario de contacto
@@ -106,7 +106,7 @@ export default function Contact() {
     // Datos de contacto
     const contactInfo = {
         telefono: "+52 (686) 198 07 66",
-        email: "reposteriapattys@gmail.com",
+        email: "reposteriasweetstack@gmail.com",
         horario: {
             semana: "Lunes a Sábado: 8:00 AM - 8:00 PM",
             domingo: "Domingo: 9:00 AM - 6:00 PM"
@@ -220,7 +220,7 @@ export default function Contact() {
 
     return (
         <>
-            <Head title="Repostería Paty's - Contáctanos" />
+            <Head title="Repostería Sweet Stack - Contáctanos" />
 
             {/* Navbar */}
             <Navbar />

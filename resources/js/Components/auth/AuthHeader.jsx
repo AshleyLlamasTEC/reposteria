@@ -13,7 +13,7 @@ export default function AuthHeader({ title, subtitle }) {
       </div>
 
       <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
-        {title || "Repostería Paty's"}
+        {title || "Repostería Sweet Stack"}
       </h1>
       <p className="text-gray-600 text-sm sm:text-base">
         {subtitle || 'Dulces momentos hechos a tu medida'}

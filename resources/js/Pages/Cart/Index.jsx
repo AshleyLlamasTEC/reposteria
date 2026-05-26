@@ -17,8 +17,8 @@ import {
     Package,
     AlertCircle,
 } from "lucide-react";
-import Navbar from "@/Components/Navbar";
-import Footer from "@/Components/Footer";
+import Navbar from "@/Components/ui/Navbar";
+import Footer from "@/Components/ui/Footer";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────
 const DEFAULT_IMAGE = "/images/default-cake.jpg";
@@ -293,7 +293,7 @@ export default function CartIndex({ items = [], cartTotal = 0 }) {
 
     return (
         <>
-            <Head title="Tu Carrito — Repostería Paty's" />
+            <Head title="Tu Carrito — Repostería Sweet Stack" />
             <Navbar />
 
             {/* Hero */}
@@ -431,7 +431,6 @@ export default function CartIndex({ items = [], cartTotal = 0 }) {
                     )}
                 </div>
             </section>
-
             <Footer />
         </>
     );
