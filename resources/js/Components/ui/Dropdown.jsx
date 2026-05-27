@@ -89,3 +89,60 @@ Dropdown.Content = Content;
 Dropdown.Link = DropdownLink;
 
 export default Dropdown;
+
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+export function Dropdown({ children, trigger, align = 'right' }) {
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    const alignClasses = {
+        left: 'left-0',
+        right: 'right-0'
+    };
+
+    return (
+        <div className="relative" ref={dropdownRef}>
+            <div onClick={() => setIsOpen(!isOpen)}>
+                {trigger}
+            </div>
+            
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.15 }}
+                        className={`absolute ${alignClasses[align]} mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50`}
+                    >
+                        {children}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+}
+
+export function DropdownItem({ children, onClick, className = '' }) {
+    return (
+        <button
+            onClick={onClick}
+            className={`w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition-colors first:rounded-t-lg last:rounded-b-lg ${className}`}
+        >
+            {children}
+        </button>
+    );
+}
