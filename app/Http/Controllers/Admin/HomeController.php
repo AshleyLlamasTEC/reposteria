@@ -8,7 +8,16 @@ use Inertia\Inertia;
 
 class HomeController extends Controller
 {
-    public function index(){
-       return Inertia::admin('Dashboard/Index');
+    public function index()
+    {
+        return Inertia::admin('Dashboard/Index', [
+            'stats' => [
+                'totalUsers' => 125,
+                'totalOrders' => 48,
+                'totalRevenue' => '3,450',
+                'pendingOrders' => 12
+            ],
+            'recentOrders' => []
+        ]);
     }
 }

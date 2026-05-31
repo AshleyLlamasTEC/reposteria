@@ -1,7 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 import { navigationConfig } from '@/Utils/admin.navigation';
 import Tooltip from '@/Components/ui/Tooltip';
-import { useAdmin } from '@/Providers/AdminProvider';
+import { useAdmin } from '@/Components/Admin/Providers/AdminProvider';
 
 export default function Sidebar() {
   const { sidebar } = useAdmin();

@@ -3,7 +3,7 @@ import { LayoutDashboard, Users, ShoppingBag, Package, Layers, Paintbrush, Facto
 export const navigationConfig = [
   {
     name: 'Dashboard',
-    href: route('admin.dashboard'),
+    href: route('admin.index'),
     icon: LayoutDashboard,
     pattern: '/admin/dashboard',
   },

@@ -3,7 +3,7 @@ import { Bell, Search } from 'lucide-react';
 import Breadcrumbs from './Breadcrumbs';
 import Avatar from '@/Components/ui/Avatar';
 import Dropdown from '@/Components/ui/Dropdown';
-import { useAdmin } from '@/Providers/AdminProvider';
+import { useAdmin } from '@/Components/Admin/Providers/AdminProvider';
 import { LogOut, User, Settings } from 'lucide-react';
 
 export default function Navbar() {
