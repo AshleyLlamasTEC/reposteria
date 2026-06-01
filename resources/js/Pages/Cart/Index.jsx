@@ -27,9 +27,9 @@ const DEFAULT_IMAGE = "/images/default-cake.jpg";
 
 /**
  * Tarjeta de producto en el carrito.
- * Las actualizaciones y eliminaciones ahora llaman al backend real.
+ * Envuelta con forwardRef para que AnimatePresence pueda pasarle una ref.
  */
-function CartItem({ item, onUpdateQuantity, onRemove, isUpdating }) {
+const CartItem = React.forwardRef(({ item, onUpdateQuantity, onRemove, isUpdating }, ref) => {
     const handleImageError = (e) => {
         e.target.style.display = "none";
         const fallback = document.createElement("div");
@@ -43,6 +43,7 @@ function CartItem({ item, onUpdateQuantity, onRemove, isUpdating }) {
 
     return (
         <motion.div
+            ref={ref}
             layout
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -107,7 +108,7 @@ function CartItem({ item, onUpdateQuantity, onRemove, isUpdating }) {
             </button>
         </motion.div>
     );
-}
+});
 
 /**
  * Panel de resumen del pedido.

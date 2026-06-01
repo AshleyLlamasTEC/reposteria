@@ -4,24 +4,17 @@ import AdminLayout from '@/Components/Admin/Layout/AdminLayout';
 import PageHeader from '@/Components/Admin/Shared/PageHeader';
 import DataTable from '@/Components/Admin/Tables/DataTable';
 import Avatar from '@/Components/ui/Avatar';
-import Badge from '@/Components/ui/Badge';
 import Button from '@/Components/ui/Button';
 import { Plus, Pencil, Trash2 } from 'lucide-react';
 
 export default function UsersIndex() {
   const { users, filters } = usePage().props;
   const [search, setSearch] = useState(filters?.search || '');
-  const [statusFilter, setStatusFilter] = useState(filters?.status || '');
 
   const columns = [
     { key: 'avatar', label: '', render: (user) => <Avatar src={user.avatar} /> },
     { key: 'name', label: 'Nombre', sortable: true },
     { key: 'email', label: 'Email', sortable: true },
-    {
-      key: 'status',
-      label: 'Estado',
-      render: (user) => <Badge status={user.active ? 'active' : 'inactive'}>{user.active ? 'Activo' : 'Inactivo'}</Badge>,
-    },
     {
       key: 'actions',
       label: 'Acciones',
@@ -56,8 +49,6 @@ export default function UsersIndex() {
         pagination={users}
         searchValue={search}
         onSearchChange={setSearch}
-        filters={{ status: statusFilter }}
-        onFilterChange={(key, value) => key === 'status' && setStatusFilter(value)}
       />
     </AdminLayout>
   );

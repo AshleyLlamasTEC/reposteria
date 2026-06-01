@@ -3,10 +3,7 @@ import { ShoppingBag, Users, BarChart3, Factory } from 'lucide-react';
 import Card from '@/Components/ui/Card';
 
 const actions = [
-  { label: 'Nuevo pedido', icon: ShoppingBag, href: '#' },
   { label: 'Ver usuarios', icon: Users, href: route('admin.users.index') },
-  { label: 'Ver reportes', icon: BarChart3, href: '#' },
-  { label: 'Ir a producción', icon: Factory, href: '#' },
 ];
 
 export default function QuickActions() {

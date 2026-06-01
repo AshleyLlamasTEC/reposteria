@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('order_number', 20)->unique()->comment('Folio único generado automáticamente');
             $table->foreignId('user_id')->constrained('users');
             $table->decimal('total_amount', 12, 2);
-            $table->enum('state', ['pending', 'in_production', 'ready', 'delivered'])->default('pending');
+            $table->enum('state', ['pending', 'approved', 'in_production', 'ready', 'delivered', 'cancelled'])->default('pending');
             $table->timestamps();
             $table->softDeletes();
             $table->index('user_id');

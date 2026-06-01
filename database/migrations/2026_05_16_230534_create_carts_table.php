@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->unique()->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->enum('status', ['active', 'completed'])->default('active');
             $table->decimal('total_amount', 12, 2)->default(0.00);
             $table->timestamps();

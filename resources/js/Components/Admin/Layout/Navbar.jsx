@@ -36,7 +36,7 @@ export default function Navbar() {
           </div>
           <button className="relative p-2 text-gray-500 hover:text-pink-600 transition-colors">
             <Bell className="w-5 h-5" />
-            <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-pink-500 text-white text-xs flex items-center justify-center rounded-full">3</span>
+            {/* <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-pink-500 text-white text-xs flex items-center justify-center rounded-full">3</span> */}
           </button>
           <Dropdown
             trigger={<div className="flex items-center gap-2 cursor-pointer"><Avatar src={auth.user?.avatar} size="sm" /><span className="text-sm font-medium text-gray-700 hidden sm:inline">{auth.user?.name}</span></div>}

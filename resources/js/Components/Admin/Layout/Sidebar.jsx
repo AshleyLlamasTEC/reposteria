@@ -11,8 +11,8 @@ export default function Sidebar() {
   return (
     <aside className={`bg-white border-r border-gray-100 flex flex-col transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'} hidden lg:flex`}>
       <div className="p-4 border-b flex items-center justify-center">
-        <img src="/logo.svg" alt="Logo" className="h-8 w-auto" />
-        {!isCollapsed && <span className="ml-3 text-lg font-bold text-gray-800">Paty's Admin</span>}
+        <img src="/images/logo.png" alt="Logo" className="h-8 w-auto" />
+        {!isCollapsed && <span className="ml-3 text-lg font-bold text-gray-800">Stack Sweet</span>}
       </div>
       <nav className="flex-1 py-4 space-y-1 px-2">
         {navigationConfig.map((item) => {

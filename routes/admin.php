@@ -10,3 +10,4 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::resource('users', UserController::class);
 
 Route::resource('orders', OrderController::class);
+Route::match(['patch', 'put'], '/orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.update-status');
